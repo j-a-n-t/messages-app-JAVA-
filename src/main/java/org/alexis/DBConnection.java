@@ -11,14 +11,14 @@ public class DBConnection {
     private String db_password = "NFMpjTahuttTaEYZKvrBRZjh9";
     private Connection conn;
 
-    public Connection get_connection() {
-        try {
-            this.conn = DriverManager.getConnection(this.url, this.db_user, this.db_password);
-            if (this.conn != null) {
-                System.out.println("Connection successfully established");
+    public Connection getCconnection() {
+        if (this.conn == null) {
+            try {
+                this.conn = DriverManager.getConnection(this.url, this.db_user, this.db_password);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return this.conn;
         }
         return this.conn;
     }
